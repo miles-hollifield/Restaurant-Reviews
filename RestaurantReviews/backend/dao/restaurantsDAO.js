@@ -1,3 +1,4 @@
+/** Data Access Object to provide access to restaurants data from API  */
 // Stores reference to our database
 let restaurants;
 
