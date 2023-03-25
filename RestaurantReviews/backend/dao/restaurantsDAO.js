@@ -1,4 +1,8 @@
 /** Data Access Object to provide access to restaurants data from API  */
+// Import mongodb
+import mongodb from "mongodb";
+// MongoDB ObjectId const reference used to convert string to a MongoDB ObjectId
+const ObjectId = mongodb.ObjectId;
 // Stores reference to our database
 let restaurants;
 
@@ -73,6 +77,78 @@ export default class RestaurantDAO {
       console.error(`Unable to convert cursor to array or problem counting documents, ${e}`);
       // return empty array and set totalNumRestaurants to 0
       return {restaurantsList: [], totalNumRestaurants: 0};
+    }
+  }
+
+  // Get reviews from reviews collection and put them into restaurants collection
+  static async getRestaurantById(id) {
+    // Attempt to match reviews and restaurants collections together from restaurant ID
+    try {
+      // Creating aggregation pipeline to help match reviews and restaurants collections together
+      const pipeline = [
+        {
+          // Matching ID of a certain restaurant
+          $match: {
+            _id: new ObjectId(id)
+          }
+        },
+        {
+          // Lookup reviews to add to result
+          $lookup: {
+            // From reviews collection
+            from: "reviews",
+            let: {
+              id: "$_id"
+            },
+            // Creating pipeline
+            pipeline: [
+              {
+                // Find all reviews that match restaurant ID
+                $match: {
+                  $expr: {
+                    $eq: ["$restaurant_id", "$$id"]
+                  }
+                }
+              },
+              {
+                // Sort by date
+                $sort: {
+                  date: -1
+                }
+              }
+            ],
+            // Set to reviews field
+            as: "reviews"
+          }
+        },
+        {
+          // Adding field called reviews to the results
+          $addFields: {
+            reviews: "$reviews",
+          }
+        }
+      ];
+      // Return the restaurant with all reviews connected to it from the aggregated pipeline of restaurants
+      return await restaurants.aggregate(pipeline).next();
+      // If failed, throw error message
+    } catch (e) {
+      console.error(`Something went wrong in getRestaurantByID: ${e}`);
+    }
+  }
+
+  // Return each distinct cuisine from restaurants collection
+  static async getCuisines() {
+    // Initialize empty cuisines object
+    let cuisines = [];
+    // Attempt to fill cuisines object from restaurants collection
+    try {
+      // Store distinct cuisines from restaurants into cuisines object
+      cuisines = await restaurants.distinct("cuisine");
+      return cuisines;
+      // If failed, throw error message
+    } catch (e) {
+      console.error(`Unable to get cuisines, ${e}`);
+      return cuisines;
     }
   }
 }

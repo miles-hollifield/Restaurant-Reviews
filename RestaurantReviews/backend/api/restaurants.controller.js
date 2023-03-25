@@ -44,28 +44,41 @@ export default class RestaurantsController {
         res.json(response);
     }
 
-    // static async apiGetRestaurantsById(req, res, next) {
-    //     try {
-    //         let id = req.params.id || {};
-    //         let restaurant = await RestaurantDAO.apiGetRestaurantsById(id);
-    //         if (!restaurant) {
-    //             res.status(404).json({ error: "Not found" });
-    //             return;
-    //         }
-    //         res.json(restaurant);
-    //     } catch (e) {
-    //         console.log(`api, ${e}`);
-    //         res.status(500).json({ error: e});
-    //     }
-    // }
+    // Returns restaurants based on restaurant ID
+    static async apiGetRestaurantById(req, res, next) {
+        // Attempt to return the restaurant from requested ID
+        try {
+            // Gets ID from request's url ID parameter
+            let id = req.params.id || {};
+            // Call apiGetRestaurantsById method from RestaurantDAO to pass into restaurant object
+            let restaurant = await RestaurantDAO.getRestaurantById(id);
+            // If nothing in restaurant object
+            if (!restaurant) {
+                // throw error message
+                res.status(404).json({ error: "Not found" });
+                return;
+            }
+            // Return restaurant json
+            res.json(restaurant);
+            // If failed, throw error message
+        } catch (e) {
+            console.log(`api, ${e}`);
+            res.status(500).json({ error: e});
+        }
+    }
 
-    // static async apiGetRestaurantCuisines(req, res, next) {
-    //     try {
-    //         let cuisine = await RestaurantDAO.getCuisines();
-    //         res.json(cuisines);
-    //     } catch (e) {
-    //         console.log(`api, ${e}`);
-    //         res.status(500).json({ error: e});
-    //     }
-    // }
+    // Returns restaurants based on cuisines
+    static async apiGetRestaurantCuisines(req, res, next) {
+        // Attempt to return the restaurants from requested cuisine
+        try {
+            // Call getCuisines method from RestaurantDAO to pass into cuisine object
+            let cuisines = await RestaurantDAO.getCuisines();
+            // Return cuisines json
+            res.json(cuisines);
+            // If failed, throw error message
+        } catch (e) {
+            console.log(`api, ${e}`);
+            res.status(500).json({ error: e});
+        }
+    }
 }

@@ -4,6 +4,7 @@ import app from "./server.js";
 import mongodb from "mongodb";
 import dotenv from "dotenv";
 import RestaurantDAO from "./dao/restaurantsDAO.js";
+import ReviewsDAO from "./dao/reviewsDAO.js";
 // Load in .env variables to configure
 dotenv.config();
 // Access to Mongo Client from MongoDB
@@ -34,9 +35,11 @@ MongoClient.connect(
   })
   // After connecting
   .then(async (client) => {
-    // Call injectDB from RestaurantsDAO, passing in client
+    // Call injectDB from RestaurantsDAO and ReviewsDAO, passing in client
     // Able to reference restaurants collection from database
     await RestaurantDAO.injectDB(client);
+    // Able to reference reviews collection from database
+    await ReviewsDAO.injectDB(client);
     // Start web server
     app.listen(port, () => {
       console.log(`listening on port ${port}`);
