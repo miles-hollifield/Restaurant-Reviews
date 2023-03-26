@@ -31,33 +31,35 @@ function App() {
   return (
     <div>
       {/* Nav Bar */}
-      <nav className="navbar navbar-expand navbar-dark bg-dark">
-        {/* Restaurant Reviews Brand link */}
-        <a href="/restaurants" className="navbar-brand">
-          Restaurant Reviews
-        </a>
-        <div className="navbar-nav mr-auto">
-          {/* Restaurants link */}
-          <li className="nav-item">
-            <Link to={"/restaurants"} className="nav-link">
-              Restaurants
-            </Link>
-          </li>
-          {/* Login/Logout link */}
-          <li className="nav-item">
-            {/* If user is logged in, show logout user */}
-            { user ? (
-              <a onClick={logout} className="nav-link" style={{cursor: 'pointer'}}>
-                Logout {user.name}
-              </a>
-              // Else, show login 
-            ) : (
-              <Link to={"/login"} className="nav-link">
-                Login
+      <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
+        {/* <div className="container-fluid"> */}
+          {/* Restaurant Reviews Brand link */}
+          <a href="/restaurants" className="navbar-brand">
+            Restaurant Reviews
+          </a>
+          <div className="navbar-nav mr-auto">
+            {/* Restaurants link */}
+            <li className="nav-item">
+              <Link to={"/restaurants"} className="nav-link">
+                Restaurants
               </Link>
-            )}
-          </li>
-        </div>
+            </li>
+            {/* Login/Logout link */}
+            <li className="nav-item">
+              {/* If user is logged in, show logout user */}
+              { user ? (
+                <a onClick={logout} className="nav-link" style={{cursor: 'pointer'}}>
+                  Logout {user.name}
+                </a>
+                // Else, show login 
+              ) : (
+                <Link to={"/login"} className="nav-link">
+                  Login
+                </Link>
+              )}
+            </li>
+          </div>
+        {/* </div> */}
       </nav>
 
       <div className="container mt-3">
