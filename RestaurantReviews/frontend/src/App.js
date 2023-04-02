@@ -4,6 +4,8 @@ import React from "react";
 import { Switch, Route, Link } from "react-router-dom";
 // Importing Bootstrap
 import "bootstrap/dist/css/bootstrap.min.css";
+// eslint-disable-next-line no-unused-vars
+import bootstrap from 'bootstrap';
 
 // Importing AddReview
 import AddReview from "./components/add-review";
