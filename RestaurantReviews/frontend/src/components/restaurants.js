@@ -100,7 +100,8 @@ const Restaurant = props => {
                                                     <div className="row">
                                                         {/* Delete Button */}
                                                         {/* eslint-disable-next-line jsx-a11y/anchor-is-valid */}
-                                                        <a onClick={() => deleteReview(review.user_id, index)} className="btn btn-primary col-lg-5 mx-1 mb-1">Delete</a>
+                                                        <a onClick={() => deleteReview(review._id, index)} className="btn btn-primary col-lg-5 mx-1 mb-1">Delete</a>
+                                                        {/* <button onClick={() => deleteReview(review._id, index)} className="btn btn-primary col-lg-5 mx-1 mb-1">Delete</button> */}
                                                         {/* Edit Button */}
                                                         <Link to={{
                                                             pathname: "/restaurants/" + props.match.params.id + "/review",

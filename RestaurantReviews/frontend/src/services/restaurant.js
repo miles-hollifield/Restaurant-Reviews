@@ -20,17 +20,17 @@ class RestaurantDataService {
 
     // createReview function to create a new review
     createReview(data) {
-        return http.post("restaurants/review-new", data);
+        return http.post("restaurants/review", data);
     }
 
     // updateReview function to update a review
     updateReview(data) {
-        return http.put("restaurants/review-edit", data);
+        return http.put("restaurants/review", data);
     }
 
     // deleteReview function to delete a review
     deleteReview(id, userId) {
-        return http.delete(`restaurants/review-delete?id=${id}`, {data:{user_id: userId}});
+        return http.delete(`restaurants/review?id=${id}`, {data:{user_id: userId}});
     }
 
     // getCuisines function to return cuisines
