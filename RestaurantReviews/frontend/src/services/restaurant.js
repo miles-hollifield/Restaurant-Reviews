@@ -9,7 +9,8 @@ class RestaurantDataService {
 
     // get function takes in id as parameter
     get(id) {
-        return http.get(`restaurant?id=${id}`);
+        //return http.get(`restaurant?id=${id}`);
+        return http.get(`restaurants/id/${id}`);
     }
 
     // find function based on query, name, and page
@@ -39,4 +40,5 @@ class RestaurantDataService {
 }
 
 // Export the class
+// eslint-disable-next-line import/no-anonymous-default-export
 export default new RestaurantDataService();

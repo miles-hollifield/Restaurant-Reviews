@@ -1,9 +1,9 @@
 // Importing React, useState, and useEffect
-import React, {useState, useEffect} from "react";
+import React, { useState, useEffect } from "react";
 // Importing RestaurantDataService
-import RestaurantDataService from "../services/restaurant"
+import RestaurantDataService from "../services/restaurant";
 // Importing Link
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const RestaurantsList = props => {
     // Keeping track of what users are searching for 
@@ -104,7 +104,7 @@ const RestaurantsList = props => {
         <div>
             <div className="row pb-1">
                 {/* Input group */}
-                <div className="input-group col-lg-4">
+                <div className="input-group col-lg">
                     {/* Search by name */}
                     <input
                         type="text"
@@ -125,7 +125,7 @@ const RestaurantsList = props => {
                     </div>
                 </div>
                 {/* Input group */}
-                <div className="input-group col-lg-4">
+                <div className="input-group col-lg">
                     {/* Search by zip code */}
                     <input
                         type="text"
@@ -146,9 +146,9 @@ const RestaurantsList = props => {
                     </div>
                 </div>
                 {/* Input group */}
-                <div className="input-group col-lg-4">
+                <div className="input-group col-lg">
                     {/* Search by cuisine */}
-                    <select onChange={onChangeSearchCuisine}>
+                    <select className="col" onChange={onChangeSearchCuisine}>
                         {/* Map through cuisines array */}
                         {cuisines.map(cuisine => {
                         return (
@@ -189,7 +189,7 @@ const RestaurantsList = props => {
                                             View Reviews
                                         </Link>
                                         {/* Google maps link of address */}
-                                        <a target="_blank" href={"https://www.google.com/maps/place/" + address} className="btn btn-primary col-lg-5 mx-1 mb-1">View Map</a>
+                                        <a target="_blank" href={"https://www.google.com/maps/place/" + address} className="btn btn-primary col-lg-5 mx-1 mb-1" rel="noreferrer">View Map</a>
                                     </div>
                                 </div>
                             </div>
